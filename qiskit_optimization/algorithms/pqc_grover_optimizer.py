@@ -107,9 +107,9 @@ class ProposeDistribution:
                 for i, key in enumerate(keys_temp):
                     values[int(key, 2)] = values_temp[i] / np.sum(values_temp)
 
-            loss = 0
+            loss = 0.
             for s, w in zip(samples, weights):
-                loss -= values[s] * w
+                loss -= np.log(values[s]+1e-7) * w
 
             return loss
 
@@ -361,7 +361,7 @@ class PQCGroverOptimizer(OptimizationAlgorithm):
                     k_x = np.array([1 if s == "1" else 0 for s in f"{k:{n_key}b}"])
                     print("real_val", problem_init.objective.evaluate(k_x))
                     if int_v < self._threshold:
-                        good_samples.append(k_bin)
+                        good_samples.append(k)
                         good_sample_values.append(int_v)
                         good_sample_found = True
 
