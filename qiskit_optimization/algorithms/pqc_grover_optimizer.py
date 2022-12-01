@@ -438,12 +438,12 @@ class PQCGroverOptimizer(OptimizationAlgorithm):
 
         # cast binaries back to integers and eventually minimization to maximization
         return cast(
-            PBILGroverOptimizationResult,
+            PQCGroverOptimizationResult,
             self._interpret(
                 x=opt_x,
                 converters=self._converters,
                 problem=problem,
-                result_class=PBILGroverOptimizationResult,
+                result_class=PQCGroverOptimizationResult,
                 # samples=samples,
                 # raw_samples=raw_samples,
                 operation_counts=operation_count,
@@ -514,7 +514,7 @@ class PQCGroverOptimizer(OptimizationAlgorithm):
         return int_v
 
 
-class PBILGroverOptimizationResult(OptimizationResult):
+class PQCGroverOptimizationResult(OptimizationResult):
     """A result object for Grover Optimization methods."""
 
     def __init__(
