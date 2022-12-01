@@ -53,12 +53,10 @@ class ProposeDistribution:
                  num_qubits,
                  quantum_instance,
                  init_param,
-                 shots=200
                  ):
         self.circuit = parametrized_circuit
         self.param = init_param
         self._quantum_instance = quantum_instance
-        self._shots = shots
         self._num_qubits = num_qubits
 
 
@@ -128,7 +126,7 @@ class PQCGroverOptimizer(OptimizationAlgorithm):
             Union[QuadraticProgramConverter, List[QuadraticProgramConverter]]
         ] = None,
         quantile=0.3,
-        threshold_lr=0.5,
+        threshold_lr=1.0,
         positive_train_conf=None,
         negative_train_conf=None,
         sample_num=10,

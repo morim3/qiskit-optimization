@@ -278,6 +278,7 @@ class GroverOptimizer(OptimizationAlgorithm):
                 if int_v < optimum_value:
                     optimum_key = k
                     optimum_value = int_v
+                    optimal_iteration = iteration
                     logger.info("Current Optimum Key: %s", optimum_key)
                     logger.info("Current Optimum Value: %s", optimum_value)
                     improvement_found = True
@@ -344,6 +345,7 @@ class GroverOptimizer(OptimizationAlgorithm):
                 result_class=GroverOptimizationResult,
                 samples=samples,
                 raw_samples=raw_samples,
+                optimal_iteration=optimal_iteration,
                 operation_counts=operation_count,
                 n_input_qubits=n_key,
                 n_output_qubits=n_value,
@@ -423,6 +425,7 @@ class GroverOptimizationResult(OptimizationResult):
         operation_counts: Dict[int, Dict[str, int]],
         n_input_qubits: int,
         n_output_qubits: int,
+        optimal_iteration: int,
         intermediate_fval: float,
         threshold: float,
         status: OptimizationResultStatus,
@@ -462,6 +465,7 @@ class GroverOptimizationResult(OptimizationResult):
         self._n_output_qubits = n_output_qubits
         self._intermediate_fval = intermediate_fval
         self._threshold = threshold
+        self._optimal_iteration = optimal_iteration
 
     @property
     def operation_counts(self) -> Dict[int, Dict[str, int]]:
