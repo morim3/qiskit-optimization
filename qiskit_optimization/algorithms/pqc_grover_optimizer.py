@@ -90,7 +90,7 @@ class ProposeDistribution:
             qc.compose(self.circuit.bind_parameters(params), inplace=True)
             result = self._quantum_instance.run(qc)
 
-            if self.quantum_instance.is_statevector:
+            if self._quantum_instance.is_statevector:
                 result = result.get_statevector(qc)
                 values = np.multiply(result, np.conj(result))
                 values = list(values.real)
