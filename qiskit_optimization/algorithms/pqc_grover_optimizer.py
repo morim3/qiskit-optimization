@@ -52,10 +52,10 @@ class ProposeDistribution:
                  parametrized_circuit, 
                  num_qubits,
                  quantum_instance,
-                 init_param=None,
+                 init_param,
                  shots=200
                  ):
-        circuit = QuantumCircuit(sum(num_qubits))
+        circuit = QuantumCircuit(num_qubits)
         circuit.h(self, circuit.qubits)
         circuit.compose(parametrized_circuit, inplace=True)
         self.circuit = circuit
