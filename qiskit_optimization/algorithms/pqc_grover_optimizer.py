@@ -68,7 +68,7 @@ class ProposeDistribution:
         spsa = SPSA(maxiter=iter,
                    blocking=True,
                    learning_rate=learning_rate,
-                   pertubation=perturb)
+                   perturbation=perturb)
         result = spsa.optimize(self.circuit.num_parameters, 
                                self.get_objective_function(samples, weights), initial_point=self.param)
         self.param = result[0]
