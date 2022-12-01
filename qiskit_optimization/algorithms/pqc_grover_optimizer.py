@@ -88,6 +88,11 @@ class ProposeDistribution:
 
             qc = QuantumCircuit(self._num_qubits)
             qc.compose(self.circuit.bind_parameters(params), inplace=True)
+            if self._quantum_instance.is_statevector:
+                pass
+            else:
+                qc.measure_all()
+
             result = self._quantum_instance.execute(qc)
 
             if self._quantum_instance.is_statevector:
