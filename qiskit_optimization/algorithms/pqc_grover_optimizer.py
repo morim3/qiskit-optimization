@@ -284,7 +284,6 @@ class PQCGroverOptimizer(OptimizationAlgorithm):
         problem_init = deepcopy(problem_)
 
         self._num_key_qubits = len(problem_.objective.linear.to_array())
-        self._pbil_param = np.ones(self._num_key_qubits) * 0.5
 
         # Variables for tracking the optimum.
         optimum_found = False
@@ -316,7 +315,7 @@ class PQCGroverOptimizer(OptimizationAlgorithm):
             good_samples = []
             good_sample_values = []
 
-            for n_sample in range(self.pbil_sample_num):
+            for n_sample in range(self.sample_num):
                 m = 1
                 good_sample_found = False
 
