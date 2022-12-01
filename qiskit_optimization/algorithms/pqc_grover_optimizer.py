@@ -66,7 +66,6 @@ class ProposeDistribution:
         if weights is None:
             weights = np.ones(len(samples))
         spsa = SPSA(maxiter=iter,
-                   blocking=True,
                    learning_rate=learning_rate,
                    perturbation=perturb)
         result = spsa.optimize(self.circuit.num_parameters, 
