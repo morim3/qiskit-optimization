@@ -62,7 +62,7 @@ class ProposeDistribution:
         self._num_qubits = num_qubits
 
 
-    def fit(self, samples, weights=None, iter=3, learning_rate=0.05, perturb=0.05):
+    def fit(self, samples, weights=None, iter=10, learning_rate=0.05, perturb=0.05):
         if weights is None:
             weights = np.ones(len(samples))
         spsa = SPSA(maxiter=iter,
@@ -404,6 +404,7 @@ class PQCGroverOptimizer(OptimizationAlgorithm):
                         m = int(np.ceil(min(m * 8 / 7, 2 ** (n_key / 2))))
                         logger.info("No Improvement. M: %s", m)
 
+
                         # Check if we've already seen this value.
                         if k not in keys_measured:
                             keys_measured.append(k)
@@ -416,6 +417,9 @@ class PQCGroverOptimizer(OptimizationAlgorithm):
                         ):
                             good_sample_found= True
                             optimum_found = True
+
+                        else:
+                            self.propose_distribution.fit([k], weights=[-1], learning_rate=0.01)
 
                     # Track the operation count.
                     operations = circuit.count_ops()
