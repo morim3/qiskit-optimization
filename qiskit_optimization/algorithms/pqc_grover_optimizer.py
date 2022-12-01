@@ -128,6 +128,7 @@ class PQCGroverOptimizer(OptimizationAlgorithm):
             Union[QuadraticProgramConverter, List[QuadraticProgramConverter]]
         ] = None,
         quantile=0.3,
+        threshold_lr=0.5,
         sample_num=10,
         init_threshold=0,
         penalty: Optional[float] = None,
@@ -155,6 +156,7 @@ class PQCGroverOptimizer(OptimizationAlgorithm):
         self._converters = self._prepare_converters(converters, penalty)
         self._threshold = init_threshold
         self.quantile = quantile
+        self.threshold_lr = threshold_lr
         self.sample_num = sample_num
         self.propose_distribution = propose_dist
 
@@ -426,7 +428,7 @@ class PQCGroverOptimizer(OptimizationAlgorithm):
                 # update parameter
                 self.propose_distribution.fit(good_samples)
                 # TODO: importance sampling
-                self._threshold = int(np.quantile(good_sample_values, self.quantile))
+                self._threshold = int(np.quantile(good_sample_values, self.quantile) * self.threshold_lr+ self._threshold * (1-self.threshold_lr)) 
                 print("threshold", self._threshold)
 
         # If the constant is 0 and we didn't find a negative, the answer is likely 0.
