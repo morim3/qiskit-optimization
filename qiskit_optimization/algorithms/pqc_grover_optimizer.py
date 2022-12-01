@@ -103,7 +103,7 @@ class ProposeDistribution:
                 result = result.get_counts(qc)
                 values_temp = list(result.values())
                 keys_temp = list(result)
-                values = np.zeros(2 ** int(sum(self._num_qubits)))
+                values = np.zeros(2 ** self._num_qubits)
                 for i, key in enumerate(keys_temp):
                     values[int(key, 2)] = values_temp[i] / np.sum(values_temp)
 
