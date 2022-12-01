@@ -302,34 +302,34 @@ class PBILGroverOptimizer(OptimizationAlgorithm):
                             optimum_key = k
                             optimum_value = int_v
 
-                    if int_v < optimum_value:
-                        optimum_key = k
-                        optimum_value = int_v
-                        logger.info("Current Optimum Key: %s", optimum_key)
-                        logger.info("Current Optimum Value: %s", optimum_value)
-                        improvement_found = True
-                        threshold = optimal_value
-
-                        # trace out work qubits and store samples
-                        if self._sampler is not None:
-                            self._circuit_results = {
-                                i[-1 * n_key :]: v for i, v in self._circuit_results.items()
-                            }
-                        else:
-                            if self._quantum_instance.is_statevector:
-                                indices = list(range(n_key, len(outcome)))
-                                rho = partial_trace(self._circuit_results, indices)
-                                self._circuit_results = cast(Dict, np.diag(rho.data) ** 0.5)
-                            else:
-                                self._circuit_results = {
-                                    i[-1 * n_key :]: v for i, v in self._circuit_results.items()
-                                }
-
-                        raw_samples = self._eigenvector_to_solutions(
-                            self._circuit_results, problem_init
-                        )
-                        raw_samples.sort(key=lambda x: x.fval)
-                        samples, _ = self._interpret_samples(problem, raw_samples, self._converters)
+                    # if int_v < optimum_value:
+                    #     optimum_key = k
+                    #     optimum_value = int_v
+                    #     logger.info("Current Optimum Key: %s", optimum_key)
+                    #     logger.info("Current Optimum Value: %s", optimum_value)
+                    #     improvement_found = True
+                    #     threshold = optimal_value
+                    #
+                    #     # trace out work qubits and store samples
+                    #     if self._sampler is not None:
+                    #         self._circuit_results = {
+                    #             i[-1 * n_key :]: v for i, v in self._circuit_results.items()
+                    #         }
+                    #     else:
+                    #         if self._quantum_instance.is_statevector:
+                    #             indices = list(range(n_key, len(outcome)))
+                    #             rho = partial_trace(self._circuit_results, indices)
+                    #             self._circuit_results = cast(Dict, np.diag(rho.data) ** 0.5)
+                    #         else:
+                    #             self._circuit_results = {
+                    #                 i[-1 * n_key :]: v for i, v in self._circuit_results.items()
+                    #             }
+                    #
+                    #     raw_samples = self._eigenvector_to_solutions(
+                    #         self._circuit_results, problem_init
+                    #     )
+                    #     raw_samples.sort(key=lambda x: x.fval)
+                    #     samples, _ = self._interpret_samples(problem, raw_samples, self._converters)
                     else:
                         # Using Durr and Hoyer method, increase m.
                         m = int(np.ceil(min(m * 8 / 7, 2 ** (n_key / 2))))
