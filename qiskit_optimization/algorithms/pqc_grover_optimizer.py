@@ -578,6 +578,7 @@ class PQCGroverOptimizationResult(OptimizationResult):
         self._n_input_qubits = n_input_qubits
         self._n_output_qubits = n_output_qubits
         self._intermediate_fval = intermediate_fval
+        self._optimal_iteration = optimal_iteration
         self._threshold = threshold
 
     @property
