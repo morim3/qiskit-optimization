@@ -55,10 +55,7 @@ class ProposeDistribution:
                  init_param,
                  shots=200
                  ):
-        circuit = QuantumCircuit(num_qubits)
-        circuit.h(self, circuit.qubits)
-        circuit.compose(parametrized_circuit, inplace=True)
-        self.circuit = circuit
+        self.circuit = parametrized_circuit
         self.param = init_param
         self._quantum_instance = quantum_instance
         self._shots = shots
