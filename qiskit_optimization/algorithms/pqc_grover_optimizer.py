@@ -129,6 +129,8 @@ class PQCGroverOptimizer(OptimizationAlgorithm):
         ] = None,
         quantile=0.3,
         threshold_lr=0.5,
+        pos_fit_conf=None,
+        neg_fit_conf=None,
         sample_num=10,
         init_threshold=0,
         penalty: Optional[float] = None,
@@ -159,6 +161,9 @@ class PQCGroverOptimizer(OptimizationAlgorithm):
         self.threshold_lr = threshold_lr
         self.sample_num = sample_num
         self.propose_distribution = propose_dist
+
+        self.positive_conf = pos_fit_conf
+        self.negative_conf = neg_fit_conf
 
         if quantum_instance is not None and sampler is not None:
             raise ValueError("Only one of quantum_instance or sampler can be passed, not both!")
@@ -419,7 +424,7 @@ class PQCGroverOptimizer(OptimizationAlgorithm):
                             optimum_found = True
 
                         else:
-                            self.propose_distribution.fit([k], weights=[-1], learning_rate=0.01)
+                            self.propose_distribution.fit([k], self.negative_conf)
 
                     # Track the operation count.
                     operations = circuit.count_ops()
@@ -430,7 +435,7 @@ class PQCGroverOptimizer(OptimizationAlgorithm):
 
             if not optimum_found:
                 # update parameter
-                self.propose_distribution.fit(good_samples)
+                self.propose_distribution.fit(good_samples, self.positive_conf)
                 # TODO: importance sampling
                 self._threshold = int(np.quantile(good_sample_values, self.quantile) * self.threshold_lr+ self._threshold * (1-self.threshold_lr)) 
                 print("threshold", self._threshold)
