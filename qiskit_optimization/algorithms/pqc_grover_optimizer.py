@@ -424,7 +424,7 @@ class PQCGroverOptimizer(OptimizationAlgorithm):
                             optimum_found = True
 
                         else:
-                            self.propose_distribution.fit([k], weights=[-1], *self.negative_conf)
+                            self.propose_distribution.fit([k], weights=[-1.], *self.negative_conf)
 
                     # Track the operation count.
                     operations = circuit.count_ops()
