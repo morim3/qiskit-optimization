@@ -424,7 +424,7 @@ class PQCGroverOptimizer(OptimizationAlgorithm):
                             optimum_found = True
 
                         else:
-                            self.propose_distribution.fit([k], weights=[-1.], *self.negative_conf)
+                            self.propose_distribution.fit(samples=[k], weights=[-1], **self.negative_conf)
 
                     # Track the operation count.
                     operations = circuit.count_ops()
@@ -435,7 +435,7 @@ class PQCGroverOptimizer(OptimizationAlgorithm):
 
             if not optimum_found:
                 # update parameter
-                self.propose_distribution.fit(good_samples, *self.positive_conf)
+                self.propose_distribution.fit(good_samples, **self.positive_conf)
                 # TODO: importance sampling
                 self._threshold = int(np.quantile(good_sample_values, self.quantile) * self.threshold_lr+ self._threshold * (1-self.threshold_lr)) 
                 print("threshold", self._threshold)
