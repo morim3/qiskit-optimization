@@ -375,6 +375,7 @@ class PQCGroverOptimizer(OptimizationAlgorithm):
                         if int_v < optimum_value:
                             optimum_key = k
                             optimum_value = int_v
+                            optimal_iteration = iteration
 
                     # if int_v < optimum_value:
                     #     optimum_key = k
@@ -458,6 +459,7 @@ class PQCGroverOptimizer(OptimizationAlgorithm):
                 result_class=PQCGroverOptimizationResult,
                 # samples=samples,
                 # raw_samples=raw_samples,
+                optimal_iteration=optimal_iteration,
                 operation_counts=operation_count,
                 n_input_qubits=n_key,
                 n_output_qubits=n_value,
@@ -538,6 +540,7 @@ class PQCGroverOptimizationResult(OptimizationResult):
         n_input_qubits: int,
         n_output_qubits: int,
         intermediate_fval: float,
+        optimal_iteration: int,
         threshold: float,
         status: OptimizationResultStatus,
         samples: Optional[List[SolutionSample]] = None,
