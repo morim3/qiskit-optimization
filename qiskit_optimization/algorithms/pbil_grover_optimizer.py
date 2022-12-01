@@ -168,7 +168,7 @@ class PBILGroverOptimizer(OptimizationAlgorithm):
 
         a_operator = QuantumCircuit(qr_key_value)
         for i in range(self._num_key_qubits):
-            a_operator.ry(-2*np.arcsin(np.sqrt(self._pbil_param[i])), i)
+            a_operator.ry(2*np.arcsin(np.sqrt(self._pbil_param[i])), i)
         a_operator.compose(quadratic_form, inplace=True)
         return a_operator
 
