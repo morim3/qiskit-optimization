@@ -76,6 +76,7 @@ from .goemans_williamson_optimizer import (
     GoemansWilliamsonOptimizationResult,
 )
 from .grover_optimizer import GroverOptimizer, GroverOptimizationResult
+from .pbil_grover_optimizer import PBILGroverOptimizer, PBILGroverOptimizationResult
 from .gurobi_optimizer import GurobiOptimizer
 from .minimum_eigen_optimizer import (
     MinimumEigenOptimizer,
@@ -113,6 +114,8 @@ __all__ = [
     "GoemansWilliamsonOptimizationResult",
     "GroverOptimizer",
     "GroverOptimizationResult",
+    "PBILGroverOptimizer",
+    "PBILGroverOptimizationResult",
     "GurobiOptimizer",
     "MeanAggregator",
     "MinimumEigenOptimizer",
