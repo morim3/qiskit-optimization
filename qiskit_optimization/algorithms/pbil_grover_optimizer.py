@@ -301,6 +301,7 @@ class PBILGroverOptimizer(OptimizationAlgorithm):
                         if int_v < optimum_value:
                             optimum_key = k
                             optimum_value = int_v
+                            optimal_iteration = iteration
 
                     # if int_v < optimum_value:
                     #     optimum_key = k
@@ -382,6 +383,7 @@ class PBILGroverOptimizer(OptimizationAlgorithm):
                 result_class=PBILGroverOptimizationResult,
                 # samples=samples,
                 # raw_samples=raw_samples,
+                optimal_iteration=optimal_iteration,
                 operation_counts=operation_count,
                 n_input_qubits=n_key,
                 n_output_qubits=n_value,
@@ -463,6 +465,7 @@ class PBILGroverOptimizationResult(OptimizationResult):
         n_output_qubits: int,
         intermediate_fval: float,
         threshold: float,
+        optimal_iteration:int,
         status: OptimizationResultStatus,
         samples: Optional[List[SolutionSample]] = None,
         raw_samples: Optional[List[SolutionSample]] = None,
@@ -500,6 +503,7 @@ class PBILGroverOptimizationResult(OptimizationResult):
         self._n_output_qubits = n_output_qubits
         self._intermediate_fval = intermediate_fval
         self._threshold = threshold
+        self._optimal_iteration = optimal_iteration
 
     @property
     def operation_counts(self) -> Dict[int, Dict[str, int]]:
