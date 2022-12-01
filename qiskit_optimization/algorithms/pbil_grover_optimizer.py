@@ -392,7 +392,7 @@ class PBILGroverOptimizer(OptimizationAlgorithm):
 
     def _measure(self, circuit: QuantumCircuit) -> str:
         """Get probabilities from the given backend, and picks a random outcome."""
-        probs = self._get_probs_dist(circuit)
+        probs = self._get_prob_dist(circuit)
         logger.info("Frequencies: %s", probs)
         # Pick a random outcome.
         return algorithm_globals.random.choice(list(probs.keys()), 1, p=list(probs.values()))[0]
