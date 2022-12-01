@@ -71,6 +71,7 @@ class ProposeDistribution:
         result = spsa.optimize(self.circuit.num_parameters, 
                                self.get_objective_function(samples, weights), initial_point=self.param)
         self.param = result[0]
+        print("param: ", self.param)
 
     def get_objective_function(self, samples, weights):
 
